@@ -1,0 +1,7 @@
+#!/bin/sh
+listenip=$(cat env/listenip) # the ip address of the server
+localip=$(cat env/localip)   # local network address inside the tunnel
+exec >/dev/null
+exec 2>&1
+(sleep 1; ifconfig tun0 "$localip" netmask 255.255.255.0 )&
+exec icmptx -s "$listenip"

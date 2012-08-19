@@ -1,0 +1,12 @@
+#!/bin/sh
+exec 2>&1
+localip=$(cat env/localip)       # local httptunnel server at 127.0.0.1
+localport=$(cat env/localport)   # default is 19999
+listenip=$(cat env/listenip)     # public ip of your server
+listenport=$(cat env/listenport) # 443 for https
+certfile=$(cat env/certfile)     # filename of cert in PEM format, create one like this: 
+                                 # openssl req -new -x509 -days 365 -nodes -out htcert.pem -keyout htcert.pem
+user=$(cat env/user)             # user to setuid to
+group=$(cat env/group)           # group to setgid to
+pidfile=$(cat env/pidfile)       # a useless pidfile
+/usr/bin/stunnel -f -r "$localip":"$localport" -d "$listenip":"$listenport" -p "$certfile" -s "$user" -g "$group" -P "$pidfile"

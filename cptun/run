@@ -1,0 +1,8 @@
+#!/bin/sh
+exec 2>&1
+hostname=$(cat env/hostname) # the hostname of the server
+keystore=$(cat env/keystore) # the keystore for the server, create with curvecpmakekey serverkey
+ipaddr=$(cat env/ipaddr)     # the ip address of the server
+port=$(cat env/port)         # preferably 53
+ext=$(cat env/ext)           # 32digit hex anything
+exec curvecpserver -v "$hostname" "$keystore" "$ipaddr" "$port" "$ext" curvecpmessage /usr/sbin/sshd -i

@@ -1,0 +1,10 @@
+#!/bin/sh
+exec 2>&1
+localip=$(cat env/localip) # the ip address inside the tunnel
+dnsname=$(cat env/dnsname) # the dns name that is set up according 
+                           # to iodine documentation
+user=$(cat env/user)       # the user to setuid to
+jail=$(cat env/jail)       # the jail to chroot to
+# env/key is a random string acting as a password, easiest generated with apg 
+# apg -q -a1 -n 1 -m 12 -M NCL
+exec /usr/sbin/iodined -f -u "$user" -t "$jail" "$localip" "$dnsname" <env/key

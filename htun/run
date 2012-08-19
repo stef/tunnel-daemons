@@ -1,0 +1,8 @@
+#!/bin/sh
+exec 2>&1
+localip=$(cat env/localip)       # for ssh, 127.0.0.1
+localport=$(cat env/localport)   # ... 22
+listenip=$(cat env/listenip)     # 127.0.0.1 is cosy
+listenport=$(cat env/listenport) # anything, like 19999
+user=$(cat env/user)             # user to chown to
+exec setuidgid "$user" /usr/bin/hts -w -F "$localip":"$localport" "$listenip":"$listenport"
