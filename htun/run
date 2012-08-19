@@ -1,5 +1,6 @@
 #!/bin/sh
 exec 2>&1
+sv start htstun || exit 1
 localip=$(cat env/localip)       # for ssh, 127.0.0.1
 localport=$(cat env/localport)   # ... 22
 listenip=$(cat env/listenip)     # 127.0.0.1 is cosy
