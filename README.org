@@ -1,0 +1,13 @@
+* Tunnel Daemons
+
+are stubs for server-side runit-based services providing various means
+of tunneling ssh traffic.
+
+ - htun/htstun provide an stunnel wrapped httptunnel
+ - iodine deploys a DNS based tunnel
+ - icmptx provides tunneling via ICMP
+ - cptun provides tunneling using CurveCP over UDP/53
+
+Warning, these are only the server side end-points of the tunnels, for
+client-side setup pls see:
+http://www.ctrlc.hu/~stef/blog/posts/Tunnel_daemons.html 
